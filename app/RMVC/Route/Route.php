@@ -7,8 +7,11 @@ class Route
 
     private static array $routesGet = [];
 
-    public static function get(string $route, array $controller)
+    public static function get(string $route, array $controller): RouteConfiguration
     {
-//        self::$routesGet[] = $route;
+        $routeConfiguration = new RouteConfiguration($route, $controller[0], $controller[1]);
+
+        self::$routesGet[] = $routeConfiguration;
+        return $routeConfiguration;
     }
 }
