@@ -19,6 +19,7 @@ class RouteDispatcher
     {
         $this->saveRequestUri();
         $this->setParamMap();
+        $this->makeRegexRequest();
 
 
     }
@@ -42,12 +43,21 @@ class RouteDispatcher
 
         foreach ($routeArray as $paramKey => $param) {
             if (preg_match('/{.*}/', $param)) {
-                $this->paramMap[$paramKey] = $param;
+                $this->paramMap[$paramKey] = preg_replace('/(^{)|(}$)/', '',$param);
             }
         }
 
+    }
+
+    private function makeRegexRequest()
+    {
+        $requestUriArray = explode('/', $this->requestUri);
+
+        foreach ($this->paramMap as $paramKay => $param)
+
+
         echo "<pre>";
-        var_dump($routeArray);
+        var_dump($requestUriArray);
         echo "</pre>";
     }
 }
